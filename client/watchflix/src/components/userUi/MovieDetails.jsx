@@ -24,7 +24,7 @@ export default function MovieDetails() {
         try {
 
             const response = await axios.get(
-                `http://localhost:8060/api/user/viewMovie/${id}`
+                `https://netflix-clone-backend.onrender.com/api/user/viewMovie/${id}`
             );
 
             console.log("Movie Details:", response.data);
@@ -58,7 +58,7 @@ export default function MovieDetails() {
         }
 
         const response = await axios.get(
-            `http://localhost:8060/api/user/mylist/check/${id}`,
+            `https://netflix-clone-backend.onrender.com/api/user/mylist/check/${id}`,
             {
                 headers: {
                     Authorization: `Bearer ${token}`,
@@ -99,7 +99,7 @@ export default function MovieDetails() {
         setMyListLoading(true);
 
         const response = await axios.post(
-            `http://localhost:8060/api/user/mylist/${movie.id}`,
+            `https://netflix-clone-backend.onrender.com/api/user/mylist/${movie.id}`,
             {},
             {
                 headers: {
@@ -170,7 +170,7 @@ const handleRating = async () => {
         setRatingLoading(true);
 
         const response = await axios.post(
-            `http://localhost:8060/api/user/rating/${movie.id}`,
+            `https://netflix-clone-backend.onrender.com/api/user/rating/${movie.id}`,
             {
                 score: selectedRating,
             },

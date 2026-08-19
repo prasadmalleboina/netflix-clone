@@ -41,7 +41,7 @@ export default function ViewAllUsers() {
             }
 
             const response = await axios.get(
-                "http://localhost:8060/api/admin/viewAllUsers",
+                "https://netflix-clone-backend.onrender.com/api/admin/viewAllUsers",
                 {
                     headers: {
                         Authorization: `Bearer ${token}`,
@@ -91,7 +91,7 @@ export default function ViewAllUsers() {
             const token = getToken();
 
             await axios.delete(
-                `http://localhost:8060/api/admin/deleteUser/${userId}`,
+                `https://netflix-clone-backend.onrender.com/api/admin/deleteUser/${userId}`,
                 {
                     headers: {
                         Authorization: `Bearer ${token}`,

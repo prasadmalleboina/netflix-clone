@@ -9,7 +9,7 @@ export default function AddGenre() {
         e.preventDefault();
         const token=localStorage.getItem("token");
         // Add logic to send data to the server or update state
-        const response = await axios.post(`http://localhost:8060/api/admin/addGenre`,
+        const response = await axios.post(`https://netflix-clone-backend.onrender.com/api/admin/addGenre`,
             {
                 name: genre,
                 token: token

@@ -63,7 +63,7 @@ export default function EditMovie() {
 
             const response = await axios.put(
 
-                "http://localhost:8060/api/admin/editMovie",
+                "https://netflix-clone-backend.onrender.com/api/admin/editMovie",
 
                 {
                     id: state.id,

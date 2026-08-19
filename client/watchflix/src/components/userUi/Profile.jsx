@@ -48,7 +48,7 @@ export default function Profile() {
             }
 
             const response = await axios.get(
-                "http://localhost:8060/api/user/profile",
+                "https://netflix-clone-backend.onrender.com/api/user/profile",
                 {
                     headers: {
                         Authorization: `Bearer ${token}`,

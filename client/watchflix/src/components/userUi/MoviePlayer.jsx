@@ -54,7 +54,7 @@ export default function MoviePlayer() {
             if (!token) return;
 
             const response = await axios.get(
-                "http://localhost:8060/api/user/continue-watching",
+                "https://netflix-clone-backend.onrender.com/api/user/continue-watching",
                 {
                     headers: {
                         Authorization: `Bearer ${token}`,
@@ -136,7 +136,7 @@ useEffect(() => {
         );
 
             await axios.post(
-                `http://localhost:8060/api/user/continue-watching/${movie.id}`,
+                `https://netflix-clone-backend.onrender.com/api/user/continue-watching/${movie.id}`,
                 {
                     progress: progressValue,
                     duration: durationValue,

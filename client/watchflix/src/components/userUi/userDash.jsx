@@ -59,7 +59,7 @@ export default function UserDash() {
     try {
 
         const response = await axios.get(
-            "http://localhost:8060/api/user/viewAllMovies"
+            "https://netflix-clone-backend.onrender.com/api/user/viewAllMovies"
         );
 
         console.log("MOVIES RESPONSE:", response.data);
@@ -88,7 +88,7 @@ export default function UserDash() {
         try {
 
             const response = await axios.get(
-                "http://localhost:8060/api/user/viewAllGenres"
+                "https://netflix-clone-backend.onrender.com/api/user/viewAllGenres"
             );
 
             setGenres(
@@ -124,7 +124,7 @@ export default function UserDash() {
             }
 
             const response = await axios.get(
-                "http://localhost:8060/api/user/continue-watching",
+                "https://netflix-clone-backend.onrender.com/api/user/continue-watching",
                 {
                     headers: {
                         Authorization: `Bearer ${token}`,
@@ -210,7 +210,7 @@ export default function UserDash() {
 
 
             const response = await axios.get(
-                `http://localhost:8060/api/user/moviesByGenre/${genreName}`
+                `https://netflix-clone-backend.onrender.com/api/user/moviesByGenre/${genreName}`
             );
 
 
@@ -246,7 +246,7 @@ export default function UserDash() {
                 try {
 
                     const response = await axios.get(
-                        `http://localhost:8060/api/user/moviesByGenre/${selectedGenre}`
+                        `https://netflix-clone-backend.onrender.com/api/user/moviesByGenre/${selectedGenre}`
                     );
 
                     setMovies(
@@ -278,7 +278,7 @@ export default function UserDash() {
         try {
 
             const response = await axios.get(
-                `http://localhost:8060/api/user/searchMovies?search=${encodeURIComponent(value)}`
+                `https://netflix-clone-backend.onrender.com/api/user/searchMovies?search=${encodeURIComponent(value)}`
             );
 
 

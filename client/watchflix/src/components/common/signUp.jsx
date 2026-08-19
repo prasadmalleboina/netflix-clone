@@ -19,7 +19,7 @@ export default function SignUp() {
         try {
 
             const response = await axios.post(
-                "http://localhost:8060/api/user/register",
+                "https://netflix-clone-backend.onrender.com/api/user/register",
                 {
                     name: name,
                     email: mail,

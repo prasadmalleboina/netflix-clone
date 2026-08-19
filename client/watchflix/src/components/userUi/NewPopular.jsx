@@ -21,7 +21,7 @@ export default function NewPopular() {
         try {
 
             const response = await axios.get(
-                "http://localhost:8060/api/user/viewAllMovies"
+                "https://netflix-clone-backend.onrender.com/api/user/viewAllMovies"
             );
 
             setMovies(response.data.data || []);

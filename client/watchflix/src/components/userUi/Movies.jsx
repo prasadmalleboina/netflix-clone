@@ -32,7 +32,7 @@ export default function Movies() {
             setLoading(true);
 
             const response = await axios.get(
-                "http://localhost:8060/api/user/viewAllMovies"
+                "https://netflix-clone-backend.onrender.com/api/user/viewAllMovies"
             );
 
             const data = response.data.data || [];
@@ -58,7 +58,7 @@ export default function Movies() {
         try {
 
             const response = await axios.get(
-                "http://localhost:8060/api/user/viewAllGenres"
+                "https://netflix-clone-backend.onrender.com/api/user/viewAllGenres"
             );
 
             setGenres(response.data.genres || []);

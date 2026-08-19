@@ -29,7 +29,7 @@ export default function SignIn() {
         try {
 
             const response = await axios.post(
-                `http://localhost:8060/api/${role}/login`,
+                `https://netflix-clone-backend.onrender.com/api/${role}/login`,
                 {
                     email: mail,
                     pass: password,

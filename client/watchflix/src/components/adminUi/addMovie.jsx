@@ -23,7 +23,7 @@ export default function AddMovie() {
         try {
 
             const res = await axios.get(
-                "http://localhost:8060/api/admin/viewGenre"
+                "https://netflix-clone-backend.onrender.com/api/admin/viewGenre"
             );
 
             setGenres(res.data.data || []);
@@ -70,7 +70,7 @@ export default function AddMovie() {
         try {
 
             const response = await axios.post(
-                "http://localhost:8060/api/admin/addMovie",
+                "https://netflix-clone-backend.onrender.com/api/admin/addMovie",
                 {
                     title,
                     desc,

@@ -15,7 +15,7 @@ export default function ViewGenre() {
         try {
 
             const response = await axios.get(
-                "http://localhost:8060/api/admin/viewGenre"
+                "https://netflix-clone-backend.onrender.com/api/admin/viewGenre"
             );
 
             console.log("Genres:", response.data);
@@ -72,7 +72,7 @@ export default function ViewGenre() {
         }
 
         const response = await axios.patch(
-            "http://localhost:8060/api/admin/deleteGenre",
+            "https://netflix-clone-backend.onrender.com/api/admin/deleteGenre",
             {
                 id: genreId
             },
