@@ -1,0 +1,105 @@
+// This is your Prisma schema file,
+// learn more about it in the docs:
+// https://pris.ly/d/prisma-schema
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "mongodb"
+  url      = env("DATABASE_URL")
+}
+
+
+model User {
+  id        String   @id @default(auto()) @map("_id") @db.ObjectId
+  name      String?
+  email     String   @unique
+  role      String
+  pass      String
+  createdAt DateTime @default(now())
+
+  myList            MyList[]
+  continueWatching  ContinueWatching[]
+}
+
+
+model Genre {
+  id     String   @id @default(auto()) @map("_id") @db.ObjectId
+  name   String
+  movies Movies[]
+}
+
+
+model Movies {
+  id        String   @id @default(auto()) @map("_id") @db.ObjectId
+  title     String
+  desc      String?
+  year      Int
+
+  // Trailer URL
+  url       String
+
+  // Actual Movie URL
+  movieUrl  String?
+
+  // Banner / Poster
+  bannerUrl String?
+
+  addedAt   DateTime @default(now())
+
+  rating    Int      @default(0)
+
+
+  // Genre Relation
+
+  genreId String @db.ObjectId
+  genre   Genre  @relation(fields: [genreId], references: [id])
+
+
+  // My List Relation
+
+  myList MyList[]
+
+
+  // Continue Watching Relation
+
+  continueWatching ContinueWatching[]
+}
+
+
+model MyList {
+
+  id      String @id @default(auto()) @map("_id") @db.ObjectId
+
+  userId  String @db.ObjectId
+  movieId String @db.ObjectId
+
+  user    User   @relation(fields: [userId], references: [id])
+  movie   Movies @relation(fields: [movieId], references: [id])
+
+  createdAt DateTime @default(now())
+
+  // Prevent same user adding same movie multiple times
+  @@unique([userId, movieId])
+}
+
+
+model ContinueWatching {
+
+  id      String @id @default(auto()) @map("_id") @db.ObjectId
+
+  userId  String @db.ObjectId
+  movieId String @db.ObjectId
+
+  user    User   @relation(fields: [userId], references: [id])
+  movie   Movies @relation(fields: [movieId], references: [id])
+
+  watchedAt DateTime @default(now())
+
+  progress  Float @default(0)
+  duration  Float @default(0)
+
+  @@unique([userId, movieId])
+}
