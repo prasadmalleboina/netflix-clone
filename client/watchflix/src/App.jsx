@@ -8,7 +8,7 @@ import ProtectedRoute from "./components/common/ProtectedRoute";
 
 import AddGenre from "./components/adminUi/addGenre";
 import AddMovie from "./components/adminUi/addMovie";
-import ViewMovie from "./components/adminUi/iewMovie";
+import ViewMovie from "./components/adminUi/ViewMovie";
 import EditMovie from "./components/adminUi/EditMovie";
 import ViewGenre from "./components/adminUi/ViewGenre";
 import ViewAllUsers from "./components/adminUi/ViewAllUsers";
