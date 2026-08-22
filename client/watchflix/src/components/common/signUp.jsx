@@ -1,6 +1,7 @@
 import axios from "axios";
 import { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
+import API_URL from "../../api";
 
 export default function SignUp() {
 
@@ -19,7 +20,7 @@ export default function SignUp() {
         try {
 
             const response = await axios.post(
-                "http://localhost:8060/api/user/register",
+                `${API_URL}/api/user/register`,
                 {
                     name: name,
                     email: mail,

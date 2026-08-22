@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react";
 import axios from "axios";
+import API_URL from "../../api";
 
 import Header from "../common/header";
 import HeroBanner from "./HeroBanner";
@@ -58,9 +59,9 @@ export default function UserDash() {
 
     try {
 
-        const response = await axios.get(
-            "http://localhost:8060/api/user/viewAllMovies"
-        );
+        const response =  await axios.get(
+    `${API_URL}/api/user/viewAllMovies`
+);
 
         console.log("MOVIES RESPONSE:", response.data);
 
@@ -87,9 +88,9 @@ export default function UserDash() {
 
         try {
 
-            const response = await axios.get(
-                "http://localhost:8060/api/user/viewAllGenres"
-            );
+            const response =await axios.get(
+    `${API_URL}/api/user/viewAllGenres`
+);
 
             setGenres(
                 response.data.genres || []
@@ -123,14 +124,14 @@ export default function UserDash() {
 
             }
 
-            const response = await axios.get(
-                "http://localhost:8060/api/user/continue-watching",
-                {
-                    headers: {
-                        Authorization: `Bearer ${token}`,
-                    },
-                }
-            );
+            const response =  await axios.get(
+    `${API_URL}/api/user/continue-watching`,
+    {
+        headers: {
+            Authorization: `Bearer ${token}`,
+        },
+    }
+);
 
             console.log(
                 "Continue Watching:",
@@ -183,140 +184,111 @@ export default function UserDash() {
     };
 
 
-    // ================= FILTER BY GENRE =================
+   // ================= FILTER BY GENRE =================
 
-    const filterByGenre = async (genreName) => {
+const filterByGenre = async (genreName) => {
 
-        try {
+    try {
 
-            setSelectedGenre(
-                genreName
-            );
+        setSelectedGenre(genreName);
+        setSearch("");
 
-            setSearch("");
-
-
-            // ALL MOVIES
-
-            if (!genreName) {
-
-                setMovies(
-                    allMovies
-                );
-
-                return;
-
-            }
-
-
-            const response = await axios.get(
-                `http://localhost:8060/api/user/moviesByGenre/${genreName}`
-            );
-
-
-            setMovies(
-                response.data.movies || []
-            );
-
-        } catch (error) {
-
-            console.log(
-                "Genre filter error:",
-                error
-            );
-
-        }
-
-    };
-
-
-    // ================= SEARCH MOVIES =================
-
-    const searchMovies = async (value) => {
-
-        setSearch(value);
-
-
-        // EMPTY SEARCH
-
-        if (!value.trim()) {
-
-            if (selectedGenre) {
-
-                try {
-
-                    const response = await axios.get(
-                        `http://localhost:8060/api/user/moviesByGenre/${selectedGenre}`
-                    );
-
-                    setMovies(
-                        response.data.movies || []
-                    );
-
-                } catch (error) {
-
-                    console.log(
-                        "Genre restore error:",
-                        error
-                    );
-
-                }
-
-            } else {
-
-                setMovies(
-                    allMovies
-                );
-
-            }
-
+        if (!genreName) {
+            setMovies(allMovies);
             return;
-
         }
 
+        const response = await axios.get(
+            `${API_URL}/api/user/moviesByGenre/${genreName}`
+        );
 
-        try {
+        setMovies(
+            response.data.movies || []
+        );
 
-            const response = await axios.get(
-                `http://localhost:8060/api/user/searchMovies?search=${encodeURIComponent(value)}`
-            );
+    } catch (error) {
+
+        console.log(
+            "Genre filter error:",
+            error
+        );
+
+    }
+
+};
 
 
-            let searchedMovies =
-                response.data.data || [];
+// ================= SEARCH MOVIES =================
 
+const searchMovies = async (value) => {
 
-            // If genre is selected,
-            // keep search results inside that genre
+    setSearch(value);
 
-            if (selectedGenre) {
+    if (!value.trim()) {
 
-                searchedMovies =
-                    searchedMovies.filter(
-                        (movie) =>
-                            movie.genre?.name ===
-                            selectedGenre
-                    );
+        if (selectedGenre) {
+
+            try {
+
+                const response = await axios.get(
+                    `${API_URL}/api/user/moviesByGenre/${selectedGenre}`
+                );
+
+                setMovies(
+                    response.data.movies || []
+                );
+
+            } catch (error) {
+
+                console.log(
+                    "Genre restore error:",
+                    error
+                );
 
             }
 
+        } else {
 
-            setMovies(
-                searchedMovies
-            );
-
-        } catch (error) {
-
-            console.log(
-                "Search error:",
-                error
-            );
+            setMovies(allMovies);
 
         }
 
-    };
+        return;
+
+    }
 
 
+    try {
+
+        const response = await axios.get(
+            `${API_URL}/api/user/searchMovies?search=${encodeURIComponent(value)}`
+        );
+
+        let searchedMovies =
+            response.data.data || [];
+
+        if (selectedGenre) {
+
+            searchedMovies =
+                searchedMovies.filter(
+                    (movie) =>
+                        movie.genre?.name === selectedGenre
+                );
+
+        }
+
+        setMovies(searchedMovies);
+
+    } catch (error) {
+
+        console.log(
+            "Search error:",
+            error
+        );
+
+    }
+
+};
     // ================= ROW DATA =================
 
 

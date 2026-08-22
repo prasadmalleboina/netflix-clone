@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
+import API_URL from "../../api";
 
 export default function ViewAllUsers() {
 
@@ -41,7 +42,7 @@ export default function ViewAllUsers() {
             }
 
             const response = await axios.get(
-                "http://localhost:8060/api/admin/viewAllUsers",
+                `${API_URL}/api/admin/viewAllUsers`,
                 {
                     headers: {
                         Authorization: `Bearer ${token}`,
@@ -91,7 +92,7 @@ export default function ViewAllUsers() {
             const token = getToken();
 
             await axios.delete(
-                `http://localhost:8060/api/admin/deleteUser/${userId}`,
+                `${API_URL}/api/admin/deleteUser/${userId}`,
                 {
                     headers: {
                         Authorization: `Bearer ${token}`,

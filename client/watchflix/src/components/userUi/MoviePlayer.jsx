@@ -1,6 +1,7 @@
 import { useEffect, useRef, useState } from "react";
 import { useLocation, useNavigate } from "react-router-dom";
 import axios from "axios";
+import API_URL from "../../api";
 
 export default function MoviePlayer() {
 
@@ -45,55 +46,51 @@ export default function MoviePlayer() {
     }, [movie]);
 
 
-    const fetchSavedProgress = async () => {
+   const fetchSavedProgress = async () => {
 
-        try {
+    try {
 
-            const token = getToken();
+        const token = getToken();
 
-            if (!token) return;
+        if (!token) return;
 
-            const response = await axios.get(
-                "http://localhost:8060/api/user/continue-watching",
-                {
-                    headers: {
-                        Authorization: `Bearer ${token}`,
-                    },
-                }
-            );
-
-            const items = response.data.data || [];
-
-            const currentItem = items.find(
-                (item) => item.movieId === movie.id
-            );
-
-            if (currentItem) {
-
-                console.log("🔥 CURRENT CONTINUE ITEM:", currentItem);
-                console.log("🔥 DB PROGRESS:", currentItem.progress);
-                console.log("🔥 DB DURATION:", currentItem.duration);
-
-                setSavedProgress(
-                    Number(currentItem.progress || 0)
-                );
-
-                setDuration(
-                    Number(currentItem.duration || 0)
-                );
-
+        const response = await axios.get(
+            `${API_URL}/api/user/continue-watching`,
+            {
+                headers: {
+                    Authorization: `Bearer ${token}`,
+                },
             }
+        );
 
-        } catch (error) {
+        const items = response.data.data || [];
 
-            console.log(
-                "Fetch Progress Error:",
-                error
+        const currentItem = items.find(
+            (item) => item.movieId === movie.id
+        );
+
+        if (currentItem) {
+
+            console.log("CURRENT CONTINUE ITEM:", currentItem);
+
+            setSavedProgress(
+                Number(currentItem.progress || 0)
             );
 
+            setDuration(
+                Number(currentItem.duration || 0)
+            );
         }
 
-    };
+    } catch (error) {
+
+        console.log(
+            "Fetch Progress Error:",
+            error
+        );
+
+    }
+};
 useEffect(() => {
 
     const video = videoRef.current;
@@ -135,18 +132,18 @@ useEffect(() => {
             durationValue
         );
 
-            await axios.post(
-                `http://localhost:8060/api/user/continue-watching/${movie.id}`,
-                {
-                    progress: progressValue,
-                    duration: durationValue,
-                },
-                {
-                    headers: {
-                        Authorization: `Bearer ${token}`,
-                    },
-                }
-            );
+           await axios.post(
+    `${API_URL}/api/user/continue-watching/${movie.id}`,
+    {
+        progress: progressValue,
+        duration: durationValue,
+    },
+    {
+        headers: {
+            Authorization: `Bearer ${token}`,
+        },
+    }
+);
 
         } catch (error) {
 

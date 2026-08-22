@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
+import API_URL from "../../api";
 
 export default function ViewGenre() {
 
@@ -15,7 +16,7 @@ export default function ViewGenre() {
         try {
 
             const response = await axios.get(
-                "http://localhost:8060/api/admin/viewGenre"
+               `${API_URL}/api/admin/viewGenre`
             );
 
             console.log("Genres:", response.data);
@@ -72,9 +73,9 @@ export default function ViewGenre() {
         }
 
         const response = await axios.patch(
-            "http://localhost:8060/api/admin/deleteGenre",
+            `${API_URL}/api/admin/deleteGenre`,
             {
-                id: genreId
+                id:genreId
             },
             {
                 headers: {

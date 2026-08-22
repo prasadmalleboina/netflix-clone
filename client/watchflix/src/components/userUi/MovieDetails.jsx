@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 import { useParams, useNavigate } from "react-router-dom";
 import axios from "axios";
+import API_URL from "../../api";
 
 export default function MovieDetails() {
 
@@ -20,31 +21,30 @@ export default function MovieDetails() {
 }, [id]);
 
     const fetchMovie = async () => {
-
-        try {
-
-            const response = await axios.get(
-                `http://localhost:8060/api/user/viewMovie/${id}`
-            );
-
-            console.log("Movie Details:", response.data);
-
-            setMovie(response.data.movie);
-
-        } catch (error) {
-
-            console.log("Movie fetch error:", error);
-
-        }
-
-    };
-    const checkMyListStatus = async () => {
     try {
+        const response = await axios.get(
+            `${API_URL}/api/user/viewMovie/${id}`
+        );
+
+        console.log("Movie Details:", response.data);
+
+        setMovie(response.data.movie);
+
+    } catch (error) {
+        console.log("Movie fetch error:", error);
+    }
+};
+
+
+const checkMyListStatus = async () => {
+    try {
+
         const cookies = document.cookie.split(";");
 
         let token = null;
 
         for (let cookie of cookies) {
+
             cookie = cookie.trim();
 
             if (cookie.startsWith("token=")) {
@@ -58,7 +58,7 @@ export default function MovieDetails() {
         }
 
         const response = await axios.get(
-            `http://localhost:8060/api/user/mylist/check/${id}`,
+            `${API_URL}/api/user/mylist/check/${id}`,
             {
                 headers: {
                     Authorization: `Bearer ${token}`,
@@ -69,25 +69,26 @@ export default function MovieDetails() {
         setInMyList(response.data.inMyList);
 
     } catch (error) {
-        console.log("Check My List Status Error:", error);
+
+        console.log(
+            "Check My List Status Error:",
+            error
+        );
+
     }
 };
     const handleMyList = async () => {
-
     try {
-
         const cookies = document.cookie.split(";");
 
         let token = null;
 
         for (let cookie of cookies) {
-
             cookie = cookie.trim();
 
             if (cookie.startsWith("token=")) {
                 token = cookie.substring("token=".length);
             }
-
         }
 
         if (!token) {
@@ -99,7 +100,7 @@ export default function MovieDetails() {
         setMyListLoading(true);
 
         const response = await axios.post(
-            `http://localhost:8060/api/user/mylist/${movie.id}`,
+            `${API_URL}/api/user/mylist/${movie.id}`,
             {},
             {
                 headers: {
@@ -115,25 +116,16 @@ export default function MovieDetails() {
         alert("Movie added to My List ❤️");
 
     } catch (error) {
-
         console.log("My List Error:", error);
 
-        if (error.response?.data?.message) {
-
-            alert(error.response.data.message);
-
-        } else {
-
-            alert("Failed to add movie to My List");
-
-        }
+        alert(
+            error.response?.data?.message ||
+            "Failed to add movie to My List"
+        );
 
     } finally {
-
         setMyListLoading(false);
-
     }
-
 };
 const handlePlayMovie = () => {
 
@@ -170,7 +162,7 @@ const handleRating = async () => {
         setRatingLoading(true);
 
         const response = await axios.post(
-            `http://localhost:8060/api/user/rating/${movie.id}`,
+           `${API_URL}/api/user/rating/${id}`,
             {
                 score: selectedRating,
             },

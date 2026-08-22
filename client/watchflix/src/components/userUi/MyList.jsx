@@ -2,6 +2,7 @@ import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import axios from "axios";
 import Header from "../common/header";
+import API_URL from "../../api";
 
 export default function MyList() {
 
@@ -45,7 +46,7 @@ export default function MyList() {
             }
 
             const response = await axios.get(
-                "http://localhost:8060/api/user/myList",
+                `${API_URL}/api/user/myList`,
                 {
                     headers: {
                         Authorization: `Bearer ${token}`,
@@ -87,7 +88,7 @@ export default function MyList() {
             }
 
             await axios.delete(
-                `http://localhost:8060/api/user/removeFromMyList/${movieId}`,
+               `${API_URL}/api/user/removeFromMyList/${movieId}`,
                 {
                     headers: {
                         Authorization: `Bearer ${token}`,

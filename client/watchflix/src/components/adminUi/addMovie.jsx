@@ -1,6 +1,7 @@
 import { useState, useEffect } from "react";
 import axios from "axios";
 import adminBg from "../../assets/admin-bg.png";
+import API_URL from "../../api";
 export default function AddMovie() {
 
     const [genres, setGenres] = useState([]);
@@ -23,7 +24,7 @@ export default function AddMovie() {
         try {
 
             const res = await axios.get(
-                "http://localhost:8060/api/admin/viewGenre"
+                `${API_URL}/api/admin/viewGenre`
             );
 
             setGenres(res.data.data || []);
@@ -70,7 +71,7 @@ export default function AddMovie() {
         try {
 
             const response = await axios.post(
-                "http://localhost:8060/api/admin/addMovie",
+                `${API_URL}/api/admin/addMovie`,
                 {
                     title,
                     desc,

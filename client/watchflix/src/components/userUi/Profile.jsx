@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import axios from "axios";
-
+import API_URL from "../../api";
 import Header from "../common/header";
 
 export default function Profile() {
@@ -48,7 +48,7 @@ export default function Profile() {
             }
 
             const response = await axios.get(
-                "http://localhost:8060/api/user/profile",
+                `${API_URL}/api/user/profile`,
                 {
                     headers: {
                         Authorization: `Bearer ${token}`,

@@ -1,6 +1,7 @@
 import { useLocation, useNavigate } from "react-router-dom";
 import { useState } from "react";
 import axios from "axios";
+import API_URL from "../../api";
 
 export default function EditMovie() {
 
@@ -63,7 +64,7 @@ export default function EditMovie() {
 
             const response = await axios.put(
 
-                "http://localhost:8060/api/admin/editMovie",
+                `${API_URL}/api/admin/editMovie`,
 
                 {
                     id: state.id,

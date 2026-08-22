@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
+import API_URL from "../../api";
 
 export default function ViewMovie() {
 
@@ -28,7 +29,7 @@ export default function ViewMovie() {
     const fetchMovies = async () => {
         try {
             const response = await axios.get(
-                "http://localhost:8060/api/admin/viewMovies"
+                `${API_URL}/api/admin/viewMovies`
             );
 
             setMovies(response.data);
@@ -51,7 +52,7 @@ export default function ViewMovie() {
             const token = getCookie("token");
 
             const response = await axios.patch(
-                `http://localhost:8060/api/admin/deleteMovie/${id}`,
+                `${API_URL}/api/admin/DeleteMovie`,
                 {},
                 {
                     headers: {

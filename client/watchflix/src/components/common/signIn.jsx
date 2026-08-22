@@ -1,7 +1,7 @@
 import axios from "axios";
 import { useState } from "react";
 import { useNavigate, Link } from "react-router-dom";
-
+import API_URL from "../../api";
 function setCookie(name, value, days) {
     const expire = new Date(
         Date.now() + days * 24 * 60 * 60 * 1000
@@ -29,7 +29,7 @@ export default function SignIn() {
         try {
 
             const response = await axios.post(
-                `http://localhost:8060/api/${role}/login`,
+                `${API_URL}/api/${role}/login`,
                 {
                     email: mail,
                     pass: password,

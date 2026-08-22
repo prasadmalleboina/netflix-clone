@@ -1,6 +1,8 @@
 import axios from 'axios';
 import React, { useState } from 'react';
 import adminBg from "../../assets/admin-bg.png";
+import API_URL from "../../api";
+
 export default function AddGenre() {
     const [genre, setGenre] = useState('');
     const [movie, setMovie] = useState('');
@@ -9,7 +11,7 @@ export default function AddGenre() {
         e.preventDefault();
         const token=localStorage.getItem("token");
         // Add logic to send data to the server or update state
-        const response = await axios.post(`http://localhost:8060/api/admin/addGenre`,
+        const response = await axios.post(`${API_URL}/api/admin/addGenre`,
             {
                 name: genre,
                 token: token

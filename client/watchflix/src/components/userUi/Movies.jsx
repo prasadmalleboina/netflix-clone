@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import axios from "axios";
+import API_URL from "../../api";
 
 import Header from "../common/header";
 
@@ -32,7 +33,7 @@ export default function Movies() {
             setLoading(true);
 
             const response = await axios.get(
-                "http://localhost:8060/api/user/viewAllMovies"
+                `${API_URL}/api/user/viewAllMovies`
             );
 
             const data = response.data.data || [];
@@ -58,7 +59,7 @@ export default function Movies() {
         try {
 
             const response = await axios.get(
-                "http://localhost:8060/api/user/viewAllGenres"
+                `${API_URL}/api/user/viewAllGenre`
             );
 
             setGenres(response.data.genres || []);

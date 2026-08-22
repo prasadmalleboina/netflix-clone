@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import axios from "axios";
+import API_URL from "../../api";
 
 import Header from "../common/header";
 import MovieRow from "./MovieRow";
@@ -21,7 +22,7 @@ export default function NewPopular() {
         try {
 
             const response = await axios.get(
-                "http://localhost:8060/api/user/viewAllMovies"
+               `${API_URL}/api/user/viewAllMovies`
             );
 
             setMovies(response.data.data || []);

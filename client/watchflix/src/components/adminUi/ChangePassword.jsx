@@ -1,6 +1,7 @@
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import axios from "axios";
+import API_URL from "../../api";
 
 export default function ChangePassword() {
 
@@ -62,7 +63,7 @@ export default function ChangePassword() {
             */
 
             const response = await axios.patch(
-                `http://localhost:8060/api/admin/adminChangePass`,
+                `${API_URL}/api/admin/adminChangePass`,
                 {
                     newPass
                 },
