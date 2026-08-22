@@ -62,7 +62,7 @@ export default function ChangePassword() {
             */
 
             const response = await axios.patch(
-                `https://netflix-clone-backend.onrender.com/api/admin/adminChangePass`,
+                `http://localhost:8060/api/admin/adminChangePass`,
                 {
                     newPass
                 },

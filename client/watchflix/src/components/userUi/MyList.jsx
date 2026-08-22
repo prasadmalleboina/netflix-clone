@@ -45,7 +45,7 @@ export default function MyList() {
             }
 
             const response = await axios.get(
-                "https://netflix-clone-backend.onrender.com/api/user/myList",
+                "http://localhost:8060/api/user/myList",
                 {
                     headers: {
                         Authorization: `Bearer ${token}`,
@@ -87,7 +87,7 @@ export default function MyList() {
             }
 
             await axios.delete(
-                `https://netflix-clone-backend.onrender.com/api/user/removeFromMyList/${movieId}`,
+                `http://localhost:8060/api/user/removeFromMyList/${movieId}`,
                 {
                     headers: {
                         Authorization: `Bearer ${token}`,
