@@ -2,7 +2,7 @@ import { useEffect, useState } from "react";
 import axios from "axios";
 import API_URL from "../../api";
 
-import Header from "../common/header";
+import Header from "../common/Header";
 import HeroBanner from "./HeroBanner";
 import MovieRow from "./MovieRow";
 
